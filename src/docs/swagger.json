@@ -1,0 +1,429 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a sample server Petstore server.  You can find out more about     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).      For this sample, you can use the api key `special-key` to test the authorization     filters.",
+    "version": "1.0.0",
+    "title": "Swagger Loja",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "sem email"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost:8080",
+  "servers": [
+    {
+      "url": "localhost:8080",
+      "description": "Dev server"
+    },
+    {
+      "url": "null",
+      "description": "Staging server"
+    },
+    {
+      "url": "null",
+      "description": "Producao server"
+    }
+  ],
+  "basePath": "/",
+  "tags": {
+    "name": "cliente",
+    "description": "Loja",
+    "externalDocs": {
+      "description": "Loja",
+      "url": "localhost:8080/cliente"
+    }
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "summary": "Login e retorna um token",
+        "description": "Login e retorna um token",
+        "operationId": "postLogin",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "login",
+            "in": "query",
+            "description": "login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "senha",
+            "in": "query",
+            "description": "senha",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso"
+          },
+          "404": {
+            "description": "Usuario ou senha invalido"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/cliente": {
+      "get": {
+        "tags": [
+          "cliente"
+        ],
+        "summary": "Lista todos os clientes",
+        "description": "Pode paginar e limitar o retorno de clientes",
+        "operationId": "getClientes",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "xtoken",
+            "in": "header",
+            "description": "Autorizacao",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Paginacao",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "limite",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso"
+          },
+          "404": {
+            "description": "Nenhum cliente encontrado"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "cliente"
+        ],
+        "summary": "Cadastro de cliente",
+        "description": "Cadastro de cliente",
+        "operationId": "postClientes",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Cadastro de cliente",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/clientePost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso"
+          },
+          "404": {
+            "description": "Nao foi possivel cadastrar o cliente"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "cliente"
+        ],
+        "summary": "Deleta cliente especifico",
+        "description": "Deleta um cliente pelo ID",
+        "operationId": "deleteCliente",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cliente_id",
+            "in": "query",
+            "description": "cliente",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso"
+          },
+          "404": {
+            "description": "Nao foi possivel deletar o cliente"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "cliente"
+        ],
+        "summary": "Atualiza cliente especifico",
+        "description": "Atualiza um cliente ",
+        "operationId": "updateCliente",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Alteracao de dados do cliente",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/cliente"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso"
+          },
+          "404": {
+            "description": "Nao foi possivel atualizar o cliente"
+          }
+        }
+      }
+    },
+    "/cliente/{cliente_id}": {
+      "get": {
+        "tags": [
+          "cliente especifico"
+        ],
+        "summary": "Retorna um cliente especifico",
+        "description": "Retorna cliente pelo ID",
+        "operationId": "getClientesByID",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cliente_id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso"
+          },
+          "404": {
+            "description": "Cliente nao encontrado"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/registro": {
+      "post": {
+        "tags": [
+          "registro usuario"
+        ],
+        "summary": "Cadastro de cliente - Usuario",
+        "description": "Cadastro de cliente - Usuario",
+        "operationId": "postClientes",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Cadastro de cliente - Usuario",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/clienteRegistro"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso"
+          },
+          "404": {
+            "description": "Nao foi possivel cadastrar o cliente"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "cliente": {
+      "type": "object",
+      "required": [
+        "cliente_email"
+      ],
+      "properties": {
+        "cliente_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "cliente_nome": {
+          "type": "string"
+        },
+        "cliente_id_pais": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "cliente_id_estado": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "cliente_id_municipio": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "cliente_endereco": {
+          "type": "string"
+        },
+        "cliente_telefone": {
+          "type": "string"
+        },
+        "cliente_email": {
+          "type": "string"
+        },
+        "cliente_password": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "cliente"
+      }
+    },
+    "clientePost": {
+      "type": "object",
+      "required": [
+        "cliente_email"
+      ],
+      "properties": {
+        "cliente_nome": {
+          "type": "string"
+        },
+        "cliente_id_pais": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "cliente_id_estado": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "cliente_id_municipio": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "cliente_endereco": {
+          "type": "string"
+        },
+        "cliente_telefone": {
+          "type": "string"
+        },
+        "cliente_email": {
+          "type": "string"
+        },
+        "cliente_password": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "cliente"
+      }
+    },
+    "clienteRegistro": {
+      "type": "object",
+      "required": [
+        "cliente_nome",
+        "cliente_email",
+        "cliente_senha"
+      ],
+      "properties": {
+        "cliente_nome": {
+          "type": "string"
+        },
+        "cliente_email": {
+          "type": "string"
+        },
+        "cliente_password": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "clienteRegistro"
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}
