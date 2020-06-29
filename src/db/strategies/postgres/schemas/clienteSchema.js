@@ -45,6 +45,9 @@ const ClientesSchema = {
         cliente_status: {
             type: Sequelize.BOOLEAN,
         },
+        role: {
+            type: Sequelize.STRING         
+        }
     },
     options: {
         tableName: 'TAB_CLIENTES',

@@ -13,12 +13,13 @@ var controller = {
             return res.status(422).send('Usuario ou senha invalidos')
         }
         let _cliente_id = result[0].cliente_id
+        let _cliente_role = result[0].role
 
         compare(req.query.senha, result[0].cliente_password, function (err, result) {
             if (err)
                 throw err
             if (result == true) {
-                var token = jwt.sign({ cliente_id: _cliente_id }, process.env.SECRET);
+                var token = jwt.sign({ cliente_id: _cliente_id, role: _cliente_role}, process.env.SECRET);
                 return res.status(200).send({ auth: true, token: token })
             } else {
                 return res.status(422).send('Usuario ou senha invalidos')
@@ -26,7 +27,6 @@ var controller = {
             }
         })
     }
-
 }
 
 module.exports = controller

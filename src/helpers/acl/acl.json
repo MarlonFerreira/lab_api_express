@@ -1,0 +1,47 @@
+[
+    {
+        "group": "guest",
+        "permissions": [
+            {
+                "resource": "swagger/*",
+                "methods": ["GET"],
+                "action": "allow"
+            },
+            {
+                "resource": "login",
+                "methods": ["POST"],
+                "action": "allow"     
+            },
+            {
+                "resource": "registro",
+                "methods": ["POST"],
+                "action": "allow"     
+            }
+        ]
+    },
+    {
+        "group": "cliente",
+        "permissions": [
+            {
+                "resource": "swagger/*",
+                "methods": ["GET"],
+                "action": "allow"
+            },
+            {
+                "resource": "cliente/*",
+                "methods": ["GET"],
+                "action": "allow"
+            }
+        ]
+    },
+    {
+        "group": "admin",
+        "permissions": [
+            {
+                "resource": "*",
+                "methods": "*",
+                "action": "allow"
+            }
+        ]
+    }
+]

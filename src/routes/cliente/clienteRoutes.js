@@ -5,7 +5,6 @@ const router = require('express').Router()
 const { check, validationResult } = require('express-validator')
 const jwt = require('jsonwebtoken')
 
-
 // ################## VERIFICA TOKEN ##################
 function verifyToken(token) {
     var decoded = jwt.verify(token, process.env.SECRET)
