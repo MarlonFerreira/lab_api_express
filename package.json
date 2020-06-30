@@ -19,10 +19,10 @@
     "express-validator": "^6.4.0",
     "helmet": "^3.21.2",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.9.0",
+    "mongoose": "^5.9.20",
     "morgan": "^1.10.0",
-    "pg": "^7.17.1",
-    "sequelize": "^5.21.3",
+    "pg": "^8.2.1",
+    "sequelize": "^6.2.3",
     "swagger-jsdoc": "^3.5.0",
     "swagger-ui-express": "^4.1.3"
   },
