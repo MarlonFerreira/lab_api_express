@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser');
 const variavelAmbiente = require('./helpers/variavelAmbienteHelper')
+var compression = require('compression')
 require('./helpers/promiseRejection')
 //const acl = require('./helpers/acl/aclHelper')
 
@@ -25,6 +26,7 @@ app.use(helmet());                                              //Instanciando s
 app.use(bodyParser.urlencoded({ extended: false }));            //Mantendo apenas no bodyParser o urlencoded
 app.use(bodyParser.json());                                     //Tranformando bodyParser em JSON
 app.use(morgan('combined', { stream: accessLogStream }));       //Usando express junto com morgan(log)
+app.use(compression());
 //app.use(acl.authorize);  
 
 (async function main() {
