@@ -14,10 +14,10 @@ function verifyToken(token) {
 
 // ################## GET ##################
 router.get('/cliente', async function (req, res) {
-    
+
     try {
         verifyToken(req.headers.xtoken)
-        
+
         await controller.getAll(req, res)
 
     } catch (error) {
@@ -35,7 +35,7 @@ router.get('/cliente/:slug', async (req, res) => {
     try {
         await controller.getOne(req, res)
     } catch (error) {
-        return res.send('Nao foi possivel fazer a consulta - Certifique-se der colocado os dados corretos')
+        return res.send('Nao foi possivel fazer a consulta')
     }
 })
 
@@ -46,9 +46,9 @@ router.post('/cliente', [
     //check('cliente_email').isEmail(),
 ], async (req, res) => {
 
-    if(!addon.add(req.body.cliente_email))
+    if (!addon.add(req.body.cliente_email))
         return res.send('Nao foi possivel criar um novo cliente')
-        
+
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(422).json({ errors: errors.array() });
@@ -97,5 +97,10 @@ router.patch('/cliente', [
             return res.status(500).send('Nao foi possivel atualizar o cliente')
         }
     })
+
+router.all('/cliente', async function (req, res) {
+
+    return res.status(204).send('Sem acesso')
+})
 
 module.exports = router

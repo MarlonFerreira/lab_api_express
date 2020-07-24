@@ -5,6 +5,9 @@ var compression = require('compression')
 require('./helpers/promiseRejection')
 //const acl = require('./helpers/acl/aclHelper')
 
+var cors = require('cors')
+require('./helpers/cors/corsHelper')
+
 // ------- SEGURANCA -------
 const helmet = require('helmet')
 
@@ -27,6 +30,8 @@ app.use(bodyParser.urlencoded({ extended: false }));            //Mantendo apena
 app.use(bodyParser.json());                                     //Tranformando bodyParser em JSON
 app.use(morgan('combined', { stream: accessLogStream }));       //Usando express junto com morgan(log)
 app.use(compression());
+app.use(cors(this.corsOptions));
+
 //app.use(acl.authorize);  
 
 (async function main() {
@@ -40,4 +45,3 @@ app.use(compression());
         console.log('Servidor rodando na porta ' + server.address().port);
     })
 })()
-module.exports = app

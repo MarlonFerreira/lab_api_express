@@ -23,9 +23,9 @@ router.post('/login', [
     }
 })
 
+router.all('/login', async function (req, res) {
+
+        return res.status(204).send('Sem acesso')
+})
+
 module.exports = router
-
-
-// if(Object.keys(result).length === 0){
-//     return res.send('Usuario ou senha invalidos') 
-// }
