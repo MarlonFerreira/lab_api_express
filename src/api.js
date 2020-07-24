@@ -12,16 +12,13 @@ require('./helpers/cors/corsHelper')
 const helmet = require('helmet')
 
 // ------- LOG -------
-const morgan = require('morgan')
-const accessLogStream = require('./helpers/log/logHelper')
+const morgan = require('morgan'), accessLogStream = require('./helpers/log/logHelper')
 
 // ------- BANCO DE DADOS -------
-const Postgres = require('./db/strategies/postgres/postgres')
-const MongoDb = require('./db/strategies/mongodb/mongodb')
+const Postgres = require('./db/strategies/postgres/postgres'), MongoDb = require('./db/strategies/mongodb/mongodb')
 
 // // ------- ROTAS -------
-const routes = require('./routes/declaracaoRoutes')
-const swaggerDoc = require('./docs/swaggerDoc')
+const routes = require('./routes/declaracaoRoutes'), swaggerDoc = require('./docs/swaggerDoc')
 
 variavelAmbiente.config()                                       //Configurando ambiente dev ou prod
 const app = express()                                           //Instanciando express
@@ -41,7 +38,7 @@ app.use(cors(this.corsOptions));
     app.use('/', routes)
     swaggerDoc(app)
 
-    var server = app.listen(process.env.PORT, function () {
+    const server = app.listen(process.env.PORT, function () {
         console.log('Servidor rodando na porta ' + server.address().port);
     })
 })()
