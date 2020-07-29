@@ -15,7 +15,7 @@ const helmet = require('helmet')
 const morgan = require('morgan'), accessLogStream = require('./helpers/log/logHelper')
 
 // ------- BANCO DE DADOS -------
-const Postgres = require('./db/strategies/postgres/postgres'), MongoDb = require('./db/strategies/mongodb/mongodb')
+const Postgres = require('./db/strategies/postgres/postgres'), MongoDb = require('./db/strategies/mongodb/mongodb'), MySql = require('./db/strategies/mysql/mysql')
 
 // // ------- ROTAS -------
 const routes = require('./routes/declaracaoRoutes'), swaggerDoc = require('./docs/swaggerDoc')
@@ -34,6 +34,7 @@ app.use(cors(this.corsOptions));
 (async function main() {
     connectionPostgres = await Postgres.connect()
     connectionMongoDB = MongoDb.connect()
+    connectionMySql = MySql.connect()
  
     app.use('/', routes)
     swaggerDoc(app)
