@@ -20,12 +20,12 @@ const Postgres = require('./db/strategies/postgres/postgres'), MongoDb = require
 // // ------- ROTAS -------
 const routes = require('./routes/declaracaoRoutes'), swaggerDoc = require('./docs/swaggerDoc')
 
-variavelAmbiente.config()                                       //Configurando ambiente dev ou prod
-const app = express()                                           //Instanciando express
-app.use(helmet());                                              //Instanciando seguranca helmet
-app.use(bodyParser.urlencoded({ extended: false }));            //Mantendo apenas no bodyParser o urlencoded
-app.use(bodyParser.json());                                     //Tranformando bodyParser em JSON
-app.use(morgan('combined', { stream: accessLogStream }));       //Usando express junto com morgan(log)
+variavelAmbiente.config()
+const app = express()
+app.use(helmet());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(morgan('combined', { stream: accessLogStream }));
 app.use(compression());
 app.use(cors(this.corsOptions));
 
