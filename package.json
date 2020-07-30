@@ -5,8 +5,8 @@
   "main": "api.js",
   "scripts": {
     "start": "node ./api.js",
-    "test": "mocha src/tests/*.js",
-    "test:watch": "mocha src/tests/*.js -w"
+    "test": "mocha src/tests/db/*.js",
+    "test:watch": "mocha src/tests/db/*.js -w"
   },
   "author": "",
   "license": "ISC",
