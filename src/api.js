@@ -38,7 +38,7 @@ app.use(cors(this.corsOptions));
     await Postgres.isConnected(this.connectionPostgres)
     connectionMongoDB = MongoDb.connect()
     await MongoDb.isConnected(this.connectionMongoDB)
- 
+
 
     app.use('/', routes)
     swaggerDoc(app)
