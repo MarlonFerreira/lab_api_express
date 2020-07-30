@@ -1,6 +1,6 @@
 const chai = require('chai')
 const chaiHttp = require('chai-http')
-const api = require('./../api')
+const api = require('../../api')
 const assert = require('assert')
 
 chai.use(chaiHttp)

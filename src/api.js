@@ -32,10 +32,14 @@ app.use(cors(this.corsOptions));
 //app.use(acl.authorize);  
 
 (async function main() {
-    connectionPostgres = await Postgres.connect()
+    connectionMySql = await MySql.connect()
+    await MySql.isConnected(this.connectionMySql)
+    connectionPostgres = await Postgres.connect() 
+    await Postgres.isConnected(this.connectionPostgres)
     connectionMongoDB = MongoDb.connect()
-    connectionMySql = MySql.connect()
+    await MongoDb.isConnected(this.connectionMongoDB)
  
+
     app.use('/', routes)
     swaggerDoc(app)
 

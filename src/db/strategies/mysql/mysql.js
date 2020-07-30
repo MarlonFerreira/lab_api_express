@@ -1,9 +1,6 @@
 const ICrud = require('./../interfaces/intefaceCrud')
 const Sequelize = require('sequelize')
 
-const variavelAmbiente = require('./../../../helpers/variavelAmbienteHelper')
-
-
 class MySql extends ICrud {
     constructor(connection, schema) {
         super()
@@ -12,7 +9,6 @@ class MySql extends ICrud {
     }
 
     static async connect(){
-        variavelAmbiente.config()
         const connection = new Sequelize(process.env.MYSQL_URL,
             {
                 //operatorsAliases: false,
@@ -24,7 +20,7 @@ class MySql extends ICrud {
                 }
             }
         )
-        console.group('Database MySql rodando')
+        console.log('Database MySql configurado e verificando conexao...')
         return connection
     }
 
@@ -34,9 +30,10 @@ class MySql extends ICrud {
         return model
     }
 
-    async isConnected() {
+    static async isConnected(connection) {
         try {
-            await this._connection.authenticate()
+            await connection.authenticate()
+            console.group('Database MySql conectado!')
             return true
         }
         catch (error) {

@@ -20,13 +20,14 @@ class Postgres extends ICrud {
                 }
             }
         )
-        console.group('Database Postgres rodando')
+        console.log('Database Postgres configurado e verificando conexao...')
         return connection
     }
 
-    async isConnected() {
+    static async isConnected(connection) {
         try {
-            await this._connection.authenticate()
+            await connection.authenticate()
+            console.group('Database Postgres conectado!')
             return true
         }
         catch (error) {

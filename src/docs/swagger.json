@@ -13,10 +13,10 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   },
-  "host": "localhost:8080",
+  "host": "localhost:8081",
   "servers": [
     {
-      "url": "localhost:8080",
+      "url": "localhost:8081",
       "description": "Dev server"
     },
     {
@@ -34,7 +34,7 @@
     "description": "Loja",
     "externalDocs": {
       "description": "Loja",
-      "url": "localhost:8080/cliente"
+      "url": "localhost:8081/cliente"
     }
   },
   "schemes": [

@@ -1,7 +1,8 @@
 const assert = require('assert')
-const Postgres = require('../db/strategies/postgres/postgres')
-const Context = require('../db/strategies/base/contextStrategy')
-const ClientesSchema = require('../db/strategies/postgres/schemas/clienteSchema')
+const Postgres = require('../../db/strategies/postgres/postgres')
+const Context = require('../../db/strategies/base/contextStrategy')
+const ClientesSchema = require('../../db/strategies/postgres/schemas/clienteSchema')
+const variavelAmbiente = require('../../helpers/variavelAmbienteHelper')
 
 const MOCK_USUARIO_INICIAL = {
     cliente_nome: 'Inicial',
@@ -60,16 +61,18 @@ const MOCK_USUARIO_DELETAR = {
     cliente_password: 'DELETAR'
 }
 
+let connection = {}
+
 describe('Postgres - Clientes', function () {
     this.beforeAll(async function () {
-        const connection = await Postgres.connect()
+        variavelAmbiente.config()
+        connection = await Postgres.connect()
         const model = await Postgres.defineModel(connection, ClientesSchema)
         context = new Context(new Postgres(connection, model))
-        await context.create(MOCK_USUARIO_INICIAL)
     })
 
     it('Verifica conexao com o Postgres', async function() {
-        const result = await context.isConnected()
+        const result = await Postgres.isConnected(connection)
         assert.equal(result, true)
     })
 
