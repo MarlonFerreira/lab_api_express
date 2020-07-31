@@ -5,6 +5,7 @@ const ProdutoSchema = {
     schema: {
         produto_id: {
             type: Sequelize.INTEGER,
+            autoIncrement: true,
             require: true
         },
         produto_categoria_id: {
